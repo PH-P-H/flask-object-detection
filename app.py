@@ -1,4 +1,5 @@
-from flask import Flask, request, jsonify
+# clone from https://github.com/AIZOOTech/flask-object-detection
+from flask import Flask, request, render_template, jsonify, url_for
 from PIL import Image
 import numpy as np
 import base64
@@ -12,6 +13,11 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 sess, detection_graph = load_model()
 
 app = Flask(__name__)
+
+@app.route("/")
+@app.route("/home")
+def home():
+    return render_template('homepage.html')
 
 @app.route('/api/', methods=["POST"])
 def main_interface():
@@ -30,8 +36,15 @@ def main_interface():
     img_arr = np.array(img)
 
     # do object detection in inference function.
+    import time
+
+    start = time.time()
+    
     results = inference(sess, detection_graph, img_arr, conf_thresh=0.5)
     print(results)
+
+    end = time.time()
+    print(end - start)
 
     return jsonify(results)
 

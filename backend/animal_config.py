@@ -1,0 +1,11 @@
+category_index = {1: 'brown_bear', 
+2: 'cattle', 
+3: 'deer', 
+4: 'dog', 
+5: 'horse', 
+6: 'lynx', 
+7: 'mule', 
+8: 'pig', 
+9:'raccoon', 
+10: 'sheep', 
+11: 'tiger'}
